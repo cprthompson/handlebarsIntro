@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="handlebars-v3.0.3.js"></script>
+  </head>
+  <body>
+    <div id="content"><div>
+    <!-- handlebars templates look similar to HTML with curly bracket expressions -->
+    <script id="simple-template" type="script/x-handlebars-template">
+      <div>
+        <h1>{{title}}</h1>
+        <div>
+          {{content}}
+        </div>
+      </div>
+    </script>
+    <script>
+      //get the string of html to make a template
+      var source = document.getElementById('simple-template').text;
+      //create the template, this returns a function to pass your content into
+      var template = Handlebars.compile(source);
+      //the date we want to pass to the template
+      var pageContent = {
+        title: 'I fed it to the cat',
+        content: 'You know that bacon in the fridge? The maple kind, yeah?'
+      };
+      //call the template function with our data and set that template into the dom
+      document.getElementById('content').innerHTML = template(pageContent);
+    </script>
+    </script>
+  </body>
+</html>

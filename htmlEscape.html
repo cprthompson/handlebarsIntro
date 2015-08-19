@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="handlebars-v3.0.3.js"></script>
+  </head>
+  <body>
+    <div id="content"><div>
+    <script id="simple-template" type="script/x-handlebars-template">
+      <div>
+        <h1>
+          {{withoutEscape}}
+        </h1>
+        <h1>
+          <!-- the triple brackets will not escape output -->
+          {{{withEscape}}}
+        </h1>
+        {{link linkElements.text linkElements.url}}
+      </div>
+    </script>
+    <script>
+      // you can also register a helper to excape only certain content
+      Handlebars.registerHelper('link', function(text, url) {
+        text = Handlebars.Utils.escapeExpression(text);
+        url  = Handlebars.Utils.escapeExpression(url);
+        var result = '<a href="' + url + '">' + text + '</a>';
+        return new Handlebars.SafeString(result);
+      });
+      var source = document.getElementById('simple-template').text;
+      var template = Handlebars.compile(source);
+      //pass in content we don't want escaped
+      var pageContent = {
+        withoutEscape: "&lt;p&gt;some html code we don't want escaped&lt;/p&gt;",
+        withEscape: "&lt;p&gt;some html code we don't want escaped&lt;/p&gt;",
+        linkElements: {text: "da google", url: "http://www.google.com"}
+      };
+      //call the template function with our data and set that template into the dom
+      document.getElementById('content').innerHTML = template(pageContent);
+    </script>
+    </script>
+  </body>
+</html>

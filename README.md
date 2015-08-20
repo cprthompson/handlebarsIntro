@@ -1,2 +1,2 @@
 # handlebarsIntro
-Examples used in an into to handlebars lightening talk
+Examples used in an intro to handlebars lightening talk
